@@ -2,7 +2,7 @@
 
 ### Preguntas
 
-#### 1.-Error en salida, 
+#### 1.-Error en salida, sin el using namespace std no corre el programa
 #### 2.-Ningun error, salida: Hola Mundo
 #### 3.-Sin salida y error, el caracter escrito ocupa mas espacio del que esta definido 
 #### 4.-Error en salida, el caracter ocupa mas espacio del definido, si se le quita el espacio del principio si jala
