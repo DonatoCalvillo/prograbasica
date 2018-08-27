@@ -1,19 +1,19 @@
-## Tarea 5
+# Tarea 5
 
 ### Preguntas
 
-### 1.-Error en salida, 
-### 2.-Ningun error, salida: Hola Mundo
-### 3.-Sin salida y error, el caracter escrito ocupa mas espacio del que esta definido 
-### 4.-Error en salida, el caracter ocupa mas espacio del definido, si se le quita el espacio del principio si jala
-### 5.-Ningun error, salida: a = 8 b = 24
-### 6.-Ningun error, salida: 15
-### 7.-Ningun error, salida: a = 6 b = 6
-### 8.-Ningun error, salida: 1
-### 9.-Ningun error, salida: 0
-### 10.-Ningun error, salida: mo
+#### 1.-Error en salida, 
+#### 2.-Ningun error, salida: Hola Mundo
+#### 3.-Sin salida y error, el caracter escrito ocupa mas espacio del que esta definido 
+#### 4.-Error en salida, el caracter ocupa mas espacio del definido, si se le quita el espacio del principio si jala
+#### 5.-Ningun error, salida: a = 8 b = 24
+#### 6.-Ningun error, salida: 15
+#### 7.-Ningun error, salida: a = 6 b = 6
+#### 8.-Ningun error, salida: 1
+#### 9.-Ningun error, salida: 0
+#### 10.-Ningun error, salida: mo
 
-## Programa
+# Programa
 
  ```
  #include <iostream> 
