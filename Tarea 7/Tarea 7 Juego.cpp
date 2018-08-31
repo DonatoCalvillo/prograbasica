@@ -38,12 +38,31 @@ void juego() {
 
 	cout << "1. Piedra \n2. Papel \n3. Tijera" << endl;
 
+	cin >> opcion;
+
+	cout << endl;
+
+	switch (maquina) {
+
+	case 1:
+		cout << "Maquina eligio piedra." << endl;
+		break;
+
+	case 2:
+		cout << "Maquina eligio papel." << endl;
+		break;
+
+	case 3:
+		cout << "Maquina eligio tijeras." << endl;
+		break;
+	}
+
+	
+
 	if (opcion == maquina) {
 		cout << "Empate." << endl;
 	}
 	else {
-
-		cin >> opcion;
 
 		switch (opcion) {
 
@@ -63,7 +82,7 @@ void juego() {
 
 	cout << endl;
 
-	cout << "Revancha?" << endl;
+	cout << "Quieres jugar denuevo?" << endl;
 
 	cout << "1. Si \n2. No" << endl;
 
