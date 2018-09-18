@@ -5,6 +5,25 @@ using namespace std;
 
 int opcion;
 
+struct persona { 
+	string nombre;
+	string apellidoP;
+	string apellidoM;
+	string telefono;
+	string correo;
+	int matricula;
+	int calificacion1;
+	int calificacion2;
+	int calificacion3;
+	string calle;
+	string colonia;
+	int numCasa;
+
+
+};
+
+persona p[10];
+
 void ListaAlum();
 void AltaAlum();
 void AltaCalif();
@@ -17,7 +36,7 @@ void main() {
 
 	cout << "Beinvenido al menu principal." << endl;
 
-	cout << "Que desea hacer?" << endl;
+	cout << "¿Que desea hacer?" << endl;
 
 	cout << "1. Ir a la lista de alumnos y calificaciones. \n2. Dar de alta alumnos. \n3. Dar de alta calificaciones. \n4. Guardar el archivo de texto \n5. Ir al manual del usuario. \n6. Salir. " << endl;
 	
