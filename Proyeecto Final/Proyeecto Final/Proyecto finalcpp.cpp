@@ -1,9 +1,11 @@
 #include <iostream>
+#include <string>
 
 
 using namespace std;
 
 int opcion;
+int c=0; // contador
 
 struct persona { 
 	string nombre;
@@ -22,7 +24,7 @@ struct persona {
 
 };
 
-persona p[10];
+persona p[100];
 
 void ListaAlum();
 void AltaAlum();
@@ -64,15 +66,26 @@ void main() {
 		Manual();
 		break;
 
+	default:
+		break;
+
 	}
   
-	system("pause > nul");
+
 }
 
 void ListaAlum() {
 	system("cls");
 	
-	cout << "Se encuentra en la lista de alumnos." << endl;
+	cout << "Se encuentra en la lista de alumnos." << endl << endl;
+
+	cout << "------------ ALUMNOS -------------" << endl<< endl;
+
+	for (int i = 0; i < c; i++)
+	{
+		cout << p[i].apellidoP << " " << p[i].apellidoM << " " << p[i].nombre << endl;
+		cout << "----------------------------------" << endl;
+	}
 
 	cout << "1. Salir" << endl;
 	
@@ -81,23 +94,39 @@ void ListaAlum() {
 	if (opcion == 1){
 		 main();
 	}
+
+	
 }
 
 void AltaAlum() {
+
 	system("cls");
+
+	cin.ignore();
 	
-	cout << "Aqui puede dar de alta a los alumos." << endl;
+	cout << "Aqui puede	dar de alta a los alumos." << endl; 
 
-	cout << "1. Salir" << endl;
+	cout << "\nNombre(s): ";
 
-	cin >> opcion;
+	getline(cin, p[c].nombre);
 
-	if (opcion == 1) {
-	   main();
-	}
+	cout << "\nApellido paterno: ";
+
+	getline(cin, p[c].apellidoP);
+
+	cout << "\nApellido materno: ";
+
+	getline(cin, p[c].apellidoM);
+         
+	c++;
+
+	main();
+	
+
 }
 
 void AltaCalif() {
+
 	system("cls");
 	
 	cout << "Aqui puede dar de alta las calificaciones." << endl;
@@ -106,9 +135,8 @@ void AltaCalif() {
 
 	cin >> opcion;
 
-	if (opcion == 1) {
-	    main();
-	}
+	
+
 }
 
 void GuardarTxt() {
