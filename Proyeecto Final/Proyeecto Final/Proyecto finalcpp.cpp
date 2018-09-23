@@ -28,9 +28,11 @@ persona p[100];
 
 void ListaAlum();
 void AltaAlum();
-void AltaCalif();
 void GuardarTxt();
 void Manual();
+void Buscar();
+void BuscarNombre();
+void BuscarMatricula();
 
 void main() {
 	system("cls");
@@ -40,7 +42,7 @@ void main() {
 
 	cout << "¿Que desea hacer?" << endl;
 
-	cout << "1. Ir a la lista de alumnos y calificaciones. \n2. Dar de alta alumnos. \n3. Dar de alta calificaciones. \n4. Guardar el archivo de texto \n5. Ir al manual del usuario. \n6. Salir. " << endl;
+	cout << "1. Ir a la lista de alumnos y calificaciones. \n2. Dar de alta alumnos. \n3. Buscar \n4. Guardar el archivo de texto. \n5. Ir al manual del usuario \n6. Salir. " << endl;
 	
 	cin >> opcion;
 
@@ -55,7 +57,7 @@ void main() {
 		break;
 
 	case 3:
-		AltaCalif();
+		Buscar();
 		break;
 
 	case 4:
@@ -79,12 +81,21 @@ void ListaAlum() {
 	
 	cout << "Se encuentra en la lista de alumnos." << endl << endl;
 
-	cout << "------------ ALUMNOS -------------" << endl<< endl;
+	cout << "-------------------------- ALUMNOS --------------------------"  << endl;
 
 	for (int i = 0; i < c; i++)
 	{
-		cout << p[i].apellidoP << " " << p[i].apellidoM << " " << p[i].nombre << endl;
-		cout << "----------------------------------" << endl;
+		cout << endl;
+
+		cout << p[i].apellidoP << " " << p[i].apellidoM << " " << p[i].nombre << " Matricula: " << p[i].matricula << endl;
+
+		cout << "Calle: " << p[i].calle << " " << p[i].numCasa << ", " << p[i].colonia << endl;
+
+		cout << "Correo: " << p[i].correo << " Telefono:" << p[i].telefono  << endl;
+
+		cout << "Calificacion 1: " << p[i].calificacion1 << " Calificacion 2: " << p[i].calificacion2 << " Calificacion 3: " << p[i].calificacion3 << endl << endl;
+
+		cout << "-----------------------------------------------------------" << endl;
 	}
 
 	cout << "1. Salir" << endl;
@@ -117,27 +128,54 @@ void AltaAlum() {
 	cout << "\nApellido materno: ";
 
 	getline(cin, p[c].apellidoM);
-         
-	c++;
+
+	cout << "\nMatricula: ";
+
+	cin >> p[c].matricula;
+
+	cin.ignore();
+
+	cout << "\nNombre de la calle: ";
+
+	getline(cin, p[c].calle);
+
+	cout << "\nNumero de casa: ";
+
+	cin >> p[c].numCasa;
+
+	cin.ignore();
+
+	cout << "\nColonia: ";
+
+	getline(cin, p[c].colonia);
+
+	cout << "\nCorreo: ";
+
+	getline(cin, p[c].correo);
+
+	cout << "\nTelefono: ";
+
+	cin >> p[c].telefono;
+
+	cout << "\nCalificacion 1: ";
+
+	cin >> p[c].calificacion1;
+
+	cout << "\nCalificacion 2: ";
+
+	cin >> p[c].calificacion2;
+
+	cout << "\nCalificacion 3: ";
+
+	cin >> p[c].calificacion3;
+
+    c++;
 
 	main();
 	
 
 }
 
-void AltaCalif() {
-
-	system("cls");
-	
-	cout << "Aqui puede dar de alta las calificaciones." << endl;
-
-	cout << "1. Salir" << endl;
-
-	cin >> opcion;
-
-	
-
-}
 
 void GuardarTxt() {
 	system("cls");
@@ -157,6 +195,97 @@ void Manual() {
 	system("cls");
 	
 	cout << "Se encuentra en el manual." << endl;
+
+	cout << "1. Salir" << endl;
+
+	cin >> opcion;
+
+	if (opcion == 1) {
+		main();
+	}
+}
+
+
+void Buscar() {
+	system("cls");
+
+	cout << "Se encuentra en el buscador." << endl;
+
+	cout << "Desea buscar por:" << endl;
+
+	cout << "1.Nombre \n2.Matricula" << endl;
+
+	cin >> opcion;
+
+	switch (opcion)
+	{
+	case 1:
+
+		 BuscarNombre();
+		 break;
+
+	case 2:
+
+		BuscarMatricula();
+		break;
+
+	default:
+		break;
+	}
+}
+
+void BuscarNombre() {
+	system("cls");
+
+	cout << "Escriba el nombre del alumno que desea buscar: ";
+
+	cout << "1. Salir" << endl;
+
+	cin >> opcion;
+
+	if (opcion == 1) {
+		main();
+	}
+}
+
+void BuscarMatricula() {
+	system("cls");
+
+	cout << "Escriba la matricula del alumno que desea buscar: ";
+
+	cin >> opcion;
+
+	int i = 0;
+
+	bool encontrado = false;
+
+	while (i < c)
+	{
+		if (opcion == p[i].matricula) {
+
+			cout << "Lo encontre: " << endl << endl;
+
+			cout << p[i].apellidoP << " " << p[i].apellidoM << " " << p[i].nombre << " Matricula: " << p[i].matricula << endl;
+
+			cout << "Calle: " << p[i].calle << " " << p[i].numCasa << ", " << p[i].colonia << endl;
+
+			cout << "Correo: " << p[i].correo << " Telefono:" << p[i].telefono << endl;
+
+			cout << "Calificacion 1: " << p[i].calificacion1 << " Calificacion 2: " << p[i].calificacion2 << " Calificacion 3: " << p[i].calificacion3 << endl << endl;
+
+			encontrado = true;
+
+			break;
+
+		}
+		if (!encontrado) {
+			cout << "No había registros con esa matricula." << endl;
+		}
+
+		i++;
+	}
+
+	
 
 	cout << "1. Salir" << endl;
 
