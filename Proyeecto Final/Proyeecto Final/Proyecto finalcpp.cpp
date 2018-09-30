@@ -281,16 +281,43 @@ void BuscarNombre() {
 		cout << "No había registros con ese nombre" << endl;
 	}
 
-	cout << "1. Salir" << endl;
+
+	cout << "1. Eliminar Alumno" << endl << "2. Salir";
 
 	cin >> opcion;
 
 	if (opcion == 1) {
-		main();
+		
+		system("cls");
+
+		for (i = i; i < c; i++) {
+			p[i].apellidoM = p[i + 1].apellidoM;
+			p[i].apellidoP = p[i + 1].apellidoP;
+			p[i].nombre = p[i + 1].nombre;
+			p[i].matricula = p[i + 1].matricula;
+			p[i].correo = p[i + 1].correo;
+			p[i].telefono = p[i + 1].telefono;
+			p[i].calle = p[i + 1].calle;
+			p[i].numCasa = p[i + 1].numCasa;
+			p[i].calificacion1 = p[i + 1].calificacion1;
+			p[i].calificacion2 = p[i + 1].calificacion2;
+			p[i].calificacion3 = p[i + 1].calificacion3;
+		}
+
+		c--;
+
+		cout << "El alumno ha sido eliminado con exito.";
+
+		system("pause >> nul");
+
 	}
+	
+	main();
+	
 }
 
 void BuscarMatricula() {
+
 	system("cls");
 
 	cout << "Escriba la matricula del alumno que desea buscar: ";
@@ -329,14 +356,39 @@ void BuscarMatricula() {
 		cout << "No había registros con esa matricula." << endl;
 	}
 	
+	
 
-	cout << "1. Salir" << endl;
+	cout << "1. Eliminar Alumno" << endl << "2. Salir";
 
 	cin >> opcion;
 
 	if (opcion == 1) {
-		main();
+		system("cls");
+
+		for (i = i; i < c; i++) {
+			p[i].apellidoM = p[i + 1].apellidoM;
+			p[i].apellidoP = p[i + 1].apellidoP;
+			p[i].nombre = p[i + 1].nombre;
+			p[i].matricula = p[i + 1].matricula;
+			p[i].correo = p[i + 1].correo;
+			p[i].telefono = p[i + 1].telefono;
+			p[i].calle = p[i + 1].calle;
+			p[i].numCasa = p[i + 1].numCasa;
+			p[i].calificacion1 = p[i + 1].calificacion1;
+			p[i].calificacion2 = p[i + 1].calificacion2;
+			p[i].calificacion3 = p[i + 1].calificacion3;
+		}
+
+		c--;
+
+		cout << "El alumno ha sido eliminado con exito.";
+
+		system("pause >> nul");
+
 	}
+	
+	main();
+	
 }
 
 void Modificar() {
