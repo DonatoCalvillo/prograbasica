@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <fstream>
 
 
 using namespace std;
@@ -35,9 +36,16 @@ void BuscarNombre();
 void BuscarMatricula();
 void Modificar();
 
+
 void main() {
 	system("cls");
 	locale::global(locale("spanish"));
+
+	string l;
+	
+	ifstream archivo("Alumnos.txt");
+
+	
 
 	cout << "Beinvenido al menu principal." << endl;
 
@@ -157,6 +165,7 @@ void AltaAlum() {
 	getline(cin, p[c].colonia);
 
 	cout << "\nCorreo: ";
+
 
 	getline(cin, p[c].correo);
 
@@ -602,4 +611,25 @@ void Modificar() {
 	if (opcion == 1) {
 		main();
 	}
+}
+
+void save() {
+
+	ofstream archivo;
+	archivo.open("Alumnos.txt");
+
+	archivo << "Lista de Alumnos: " << endl;
+	cout << endl;
+
+	for (int i = 1; i < c; i++) {
+
+		archivo << p[i].matricula << "  " << p[i].apellidoP << " " << p[i].apellidoM << " " << p[i].nombre << "  " <<
+			p[i].correo << "  " << p[i].telefono << "  " << p[i].numCasa << " " <<
+			p[i].calle << "  " << " " << p[i].colonia << p[i].calificacion1 << "  " << p[i].calificacion2 << "  " <<
+			p[i].calificacion3 << "  " << endl;
+	}
+
+	archivo.close();
+
+	
 }
