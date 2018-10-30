@@ -1,14 +1,14 @@
-#include <iostream>
-#include <string>
-#include <fstream>
+#include <iostream> // Para imprimir
+#include <string> //Para los strings
+#include <fstream> //Para los archivos txt o .data
 
 
-using namespace std;
+using namespace std; // Para no poner STD en cada linea de salida
 
-int opcion;
+int opcion; // Para los switchs
 int c=0; // contador
 
-struct persona { 
+struct persona { // creacion de variable
 	string nombre;
 	string apellidoP;
 	string apellidoM;
@@ -25,7 +25,9 @@ struct persona {
 
 };
 
-persona p[100];
+persona p[100]; // Arreglo de estructuras
+
+//Funciones declaradas para luego poder ser llamadas
 
 void ListaAlum();
 void AltaAlum();
@@ -37,13 +39,31 @@ void BuscarMatricula();
 void Modificar();
 
 
+
 void main() {
 	system("cls");
 	locale::global(locale("spanish"));
 
 	string l;
+
+	ofstream output_file("Alumnos.data", ios::binary);
 	
-	ifstream archivo("Alumnos.txt");
+	ifstream lectura;
+
+	lectura.open("Alumnos.data", ios::binary);
+
+	if (lectura.is_open()) {
+
+		while (!lectura.eof()) {
+			lectura.read((char*)&p, sizeof(p));
+		}
+	}
+	else {
+		cout << "Archivo inexistente o problemas para abrirlo." << endl;
+		system("pause>nul");
+	}
+
+	lectura.close();
 
 	
 
@@ -126,6 +146,8 @@ void ListaAlum() {
 
 void AltaAlum() {
 
+	bool valid = true;
+
 	system("cls");
 
 	cin.ignore();
@@ -171,7 +193,54 @@ void AltaAlum() {
 
 	cout << "\nTelefono: ";
 
-	cin >> p[c].telefono;
+	getline(cin, p[c].telefono);
+	
+	int tam = p[c].telefono.size();
+	
+	for (int i = 0; i < tam; i++)
+	{
+		if (p[c].telefono[i] <= 48 || p[c].telefono[i] >= 57)
+		{
+			valid = false;
+
+			break;
+		}
+		else
+		{
+			valid = true;
+
+			break;
+		}
+
+	}
+
+	while (valid=true)
+	{
+		cout << "Error, reingrese el numero otra vez" << endl;
+		
+		cout << "\nTelefono: ";
+
+		getline(cin, p[c].telefono);
+
+		int tam = p[c].telefono.size();
+
+		for (int i = 0; i < tam; i++)
+		{
+			if (p[c].telefono[i] <= 48 || p[c].telefono[i] >= 57)
+			{
+				valid = false;
+
+				break;
+			}
+			else
+			{
+				valid = true;
+
+				break;
+			}
+		}
+
+	}
 
 	cout << "\nCalificacion 1: ";
 
@@ -186,6 +255,8 @@ void AltaAlum() {
 	cin >> p[c].calificacion3;
 
     c++;
+
+	save();
 
 	main();
 	
@@ -320,7 +391,8 @@ void BuscarNombre() {
 		system("pause >> nul");
 
 	}
-	
+	save();
+
 	main();
 	
 }
@@ -395,6 +467,8 @@ void BuscarMatricula() {
 		system("pause >> nul");
 
 	}
+
+	save();
 	
 	main();
 	
@@ -600,11 +674,10 @@ void Modificar() {
 		cout << "No había registros con esa matricula." << endl;
 	}
 
-	
+	save();
 
 	
-
-	cout << "1. Salir" << endl;
+cout << "1. Salir" << endl;
 
 	cin >> opcion;
 
@@ -616,20 +689,16 @@ void Modificar() {
 void save() {
 
 	ofstream archivo;
-	archivo.open("Alumnos.txt");
 
-	archivo << "Lista de Alumnos: " << endl;
-	cout << endl;
+	archivo.open("Alumnos.data", ios::binary);
 
-	for (int i = 1; i < c; i++) {
-
-		archivo << p[i].matricula << "  " << p[i].apellidoP << " " << p[i].apellidoM << " " << p[i].nombre << "  " <<
-			p[i].correo << "  " << p[i].telefono << "  " << p[i].numCasa << " " <<
-			p[i].calle << "  " << " " << p[i].colonia << p[i].calificacion1 << "  " << p[i].calificacion2 << "  " <<
-			p[i].calificacion3 << "  " << endl;
-	}
+	
+	archivo.write((char*)&p, sizeof(p));
 
 	archivo.close();
 
 	
 }
+
+
+
