@@ -37,6 +37,7 @@ void Buscar();
 void BuscarNombre();
 void BuscarMatricula();
 void Modificar();
+void save();
 
 
 
@@ -146,7 +147,7 @@ void ListaAlum() {
 
 void AltaAlum() {
 
-	bool valid = true;
+	
 
 	system("cls");
 
@@ -194,27 +195,38 @@ void AltaAlum() {
 	cout << "\nTelefono: ";
 
 	getline(cin, p[c].telefono);
-	
+
+	bool valid = false;
+
 	int tam = p[c].telefono.size();
+
 	
 	for (int i = 0; i < tam; i++)
 	{
-		if (p[c].telefono[i] <= 48 || p[c].telefono[i] >= 57)
+		if (p[c].telefono[i] >= 48 && p[c].telefono[i] <= 57)
 		{
 			valid = false;
 
-			break;
+			
 		}
 		else
 		{
 			valid = true;
 
-			break;
+			
 		}
 
 	}
 
-	while (valid=true)
+    if (tam > 12 || tam < 10) 
+	{
+
+			valid = true;
+	}
+	
+
+	
+	while (valid == true)
 	{
 		cout << "Error, reingrese el numero otra vez" << endl;
 		
