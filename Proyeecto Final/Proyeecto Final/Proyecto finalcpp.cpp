@@ -1,14 +1,14 @@
-#include <iostream> // Para imprimir
-#include <string> //Para los strings
-#include <fstream> //Para los archivos txt o .data
+#include <iostream> 
+#include <string> 
+#include <fstream> 
 
 
-using namespace std; // Para no poner STD en cada linea de salida
+using namespace std; 
 
-int opcion; // Para los switchs
-int c=0; // contador
+int opcion; 
+int c = 0;
 
-struct persona { // creacion de variable
+struct persona { 
 	string nombre;
 	string apellidoP;
 	string apellidoM;
@@ -25,10 +25,9 @@ struct persona { // creacion de variable
 
 };
 
-persona p[100]; // Arreglo de estructuras
+persona p[100];
 
-//Funciones declaradas para luego poder ser llamadas
-
+				
 void ListaAlum();
 void AltaAlum();
 void GuardarTxt();
@@ -43,37 +42,41 @@ void save();
 
 void main() {
 	system("cls");
+
 	locale::global(locale("spanish"));
 
-	string l;
-
-	ofstream output_file("Alumnos.data", ios::binary);
-	
 	ifstream lectura;
 
-	lectura.open("Alumnos.data", ios::binary);
+	lectura.open("Alumnos.txt", ios::binary);
 
 	if (lectura.is_open()) {
 
 		while (!lectura.eof()) {
+
 			lectura.read((char*)&p, sizeof(p));
+
+
 		}
 	}
 	else {
-		cout << "Archivo inexistente o problemas para abrirlo." << endl;
+
+		cout << "Si es la primera vez que ingresa al programa presione ENTER, salga del mismo y reingrese al programa para la creacion de su archivo." << endl;
+
+		cout << "Si no es la primera vez que ingresa al programa el archivo es inexistente o presenta errores al abrirse." << endl;
+
 		system("pause>nul");
 	}
 
 	lectura.close();
 
-	
+	system("cls");
 
 	cout << "Beinvenido al menu principal." << endl;
 
 	cout << "¿Que desea hacer?" << endl;
 
 	cout << "1. Ir a la lista de alumnos y calificaciones. \n2. Dar de alta alumnos. \n3. Buscar. \n4. Guardar el archivo de texto. \n5. Ir al manual del usuario. \n6. Modificar datos. \n7. Salir. " << endl;
-	
+
 	cin >> opcion;
 
 	switch (opcion) {
@@ -103,21 +106,22 @@ void main() {
 		break;
 
 	default:
+		cout << "Seleccione una opcion valida." << endl;
 		break;
 
 	}
 
-	
-  
 
+
+	save();
 }
 
 void ListaAlum() {
 	system("cls");
-	
+
 	cout << "Se encuentra en la lista de alumnos." << endl << endl;
 
-	cout << "-------------------------- ALUMNOS --------------------------"  << endl;
+	cout << "-------------------------- ALUMNOS --------------------------" << endl;
 
 	for (int i = 0; i < c; i++)
 	{
@@ -127,33 +131,35 @@ void ListaAlum() {
 
 		cout << "Calle: " << p[i].calle << " " << p[i].numCasa << ", " << p[i].colonia << endl;
 
-		cout << "Correo: " << p[i].correo << " Telefono:" << p[i].telefono  << endl;
+		cout << "Correo: " << p[i].correo << " Telefono:" << p[i].telefono << endl;
 
 		cout << "Calificacion 1: " << p[i].calificacion1 << " Calificacion 2: " << p[i].calificacion2 << " Calificacion 3: " << p[i].calificacion3 << endl << endl;
+
+		cout << "Promedio " << (p[i].calificacion1 + p[i].calificacion2 + p[i].calificacion3) / 3 << endl;
 
 		cout << "-----------------------------------------------------------" << endl;
 	}
 
 	cout << "1. Salir" << endl;
-	
+
 	cin >> opcion;
 
-	if (opcion == 1){
-		 main();
+	if (opcion == 1) {
+		main();
 	}
 
-	
+
 }
 
 void AltaAlum() {
 
-	
+
 
 	system("cls");
 
 	cin.ignore();
-	
-	cout << "Aqui puede	dar de alta a los alumos." << endl; 
+
+	cout << "Aqui puedes dar de alta a los alumos." << endl;
 
 	cout << "\nNombre(s): ";
 
@@ -187,72 +193,122 @@ void AltaAlum() {
 
 	getline(cin, p[c].colonia);
 
-	cout << "\nCorreo: ";
 
 
-	getline(cin, p[c].correo);
+
+
+	bool valid = false;
+
+	while (valid == false) {
+
+		bool arroba = false;
+
+		bool com = false;
+
+		
+
+		int tamcorreo;
+
+		cout << "\nCorreo: ";
+
+
+		getline(cin, p[c].correo);
+
+		tamcorreo = p[c].correo.size();
+
+		while (tamcorreo < 6) {
+
+			cout << "Ingrese un correo valido" << endl;
+
+			cout << "\nCorreo: ";
+
+			getline(cin, p[c].correo);
+
+			tamcorreo = p[c].correo.size();
+		}
+
+		for (int i = 0; i < tamcorreo; i++)
+		{
+
+			if (p[c].correo[i] == 64) {
+
+				arroba = true;
+
+			}
+
+		}
+
+		if (p[c].correo[tamcorreo - 1] == 109 && p[c].correo[tamcorreo - 2] == 111 && p[c].correo[tamcorreo - 3] == 99 && p[c].correo[tamcorreo - 4] == 46)
+		{
+			com = true;
+		}
+
+		if (arroba == true && com == true) {
+
+			valid == true;
+
+			break;
+		}
+
+		if (arroba == false) {
+			cout << "No tiene arroba." << endl;
+		}
+		if (com == false) {
+			cout << "No tiene terminacion en .com." << endl;
+		}
+
+	}
+
 
 	cout << "\nTelefono: ";
 
 	getline(cin, p[c].telefono);
 
-	bool valid = false;
-
 	int tam = p[c].telefono.size();
 
-	
-	for (int i = 0; i < tam; i++)
+	int q = 0;
+
+	while (q < tam)
 	{
-		if (p[c].telefono[i] >= 48 && p[c].telefono[i] <= 57)
+		for (int i = 0; i < tam; i++)
 		{
-			valid = false;
+			if (p[c].telefono[i] < 48 || p[c].telefono[i] > 57)
+			{
+				cout << "Error, verifique todos sean numeros" << endl;
 
-			
-		}
-		else
-		{
-			valid = true;
 
-			
+				cout << "\nTelefono: ";
+
+				getline(cin, p[c].telefono);
+
+				q = -1;
+
+
+			}
+
+			q++;
+
 		}
+
 
 	}
 
-    if (tam > 12 || tam < 10) 
+
+	while (tam < 8 || tam > 11)
 	{
 
-			valid = true;
-	}
-	
+		cout << "Error, verifique que el numero sea de 10 a 12 numeros" << endl;
 
-	
-	while (valid == true)
-	{
-		cout << "Error, reingrese el numero otra vez" << endl;
-		
 		cout << "\nTelefono: ";
 
 		getline(cin, p[c].telefono);
 
-		int tam = p[c].telefono.size();
-
-		for (int i = 0; i < tam; i++)
-		{
-			if (p[c].telefono[i] <= 48 || p[c].telefono[i] >= 57)
-			{
-				valid = false;
-
-				break;
-			}
-			else
-			{
-				valid = true;
-
-				break;
-			}
-		}
+		tam = p[c].telefono.size();
 
 	}
+
+
+
 
 	cout << "\nCalificacion 1: ";
 
@@ -266,19 +322,18 @@ void AltaAlum() {
 
 	cin >> p[c].calificacion3;
 
-    c++;
+	c++;
 
-	save();
 
 	main();
-	
+
 
 }
 
 
 void GuardarTxt() {
 	system("cls");
-	
+
 	cout << "Aqui puede guardar la informacion en un documento de texto." << endl;
 
 	cout << "1. Salir" << endl;
@@ -286,13 +341,13 @@ void GuardarTxt() {
 	cin >> opcion;
 
 	if (opcion == 1) {
-	   main();
+		main();
 	}
 }
 
 void Manual() {
 	system("cls");
-	
+
 	cout << "Se encuentra en el manual." << endl;
 
 	cout << "1. Salir" << endl;
@@ -320,8 +375,8 @@ void Buscar() {
 	{
 	case 1:
 
-		 BuscarNombre();
-		 break;
+		BuscarNombre();
+		break;
 
 	case 2:
 
@@ -341,7 +396,7 @@ void BuscarNombre() {
 	cout << "Escriba UNICAMENTE el nombre del alumno que desea buscar: ";
 
 	string n;
-	
+
 	getline(cin, n);
 
 	bool encontrado = false;
@@ -350,7 +405,7 @@ void BuscarNombre() {
 
 	while (i < c)
 	{
-		if (strcmp(n.c_str(), p[i].nombre.c_str()) == 0) { 
+		if (strcmp(n.c_str(), p[i].nombre.c_str()) == 0) {
 
 			cout << "Lo encontré: " << endl;
 
@@ -361,10 +416,10 @@ void BuscarNombre() {
 			cout << "Correo: " << p[i].correo << " Telefono:" << p[i].telefono << endl;
 
 			cout << "Calificacion 1: " << p[i].calificacion1 << " Calificacion 2: " << p[i].calificacion2 << " Calificacion 3: " << p[i].calificacion3 << endl << endl;
-			
+
 			encontrado = true;
 
-			break; 
+			break;
 		}
 		i++;
 	}
@@ -379,7 +434,7 @@ void BuscarNombre() {
 	cin >> opcion;
 
 	if (opcion == 1) {
-		
+
 		system("cls");
 
 		for (i = i; i < c; i++) {
@@ -403,10 +458,10 @@ void BuscarNombre() {
 		system("pause >> nul");
 
 	}
-	save();
+
 
 	main();
-	
+
 }
 
 void BuscarMatricula() {
@@ -440,7 +495,7 @@ void BuscarMatricula() {
 			break;
 
 		}
-		
+
 
 		i++;
 	}
@@ -448,8 +503,8 @@ void BuscarMatricula() {
 	if (!encontrado) {
 		cout << "No había registros con esa matricula." << endl;
 	}
-	
-	
+
+
 
 	cout << "1. Eliminar Alumno" << endl << "2. Salir";
 
@@ -480,14 +535,14 @@ void BuscarMatricula() {
 
 	}
 
-	save();
-	
+
+
 	main();
-	
+
 }
 
 void Modificar() {
-	
+
 	system("cls");
 
 	bool encontrado = false;
@@ -686,10 +741,8 @@ void Modificar() {
 		cout << "No había registros con esa matricula." << endl;
 	}
 
-	save();
 
-	
-cout << "1. Salir" << endl;
+	cout << "1. Salir" << endl;
 
 	cin >> opcion;
 
@@ -702,15 +755,13 @@ void save() {
 
 	ofstream archivo;
 
-	archivo.open("Alumnos.data", ios::binary);
+	archivo.open("Alumnos.txt", ios::binary);
 
-	
+
 	archivo.write((char*)&p, sizeof(p));
 
 	archivo.close();
 
-	
+
 }
-
-
 
